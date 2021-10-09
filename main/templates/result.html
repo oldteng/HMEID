@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search result - HMEID
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="/HMEID/static/css/datatables.min.css"/>
+<script type="text/javascript" src="/HMEID/static/js/datatables.min.js"></script>
+<script type="text/javascript" src="/HMEID/static/js/echarts.min.js"></script>
+<script type="text/javascript" src="/HMEID/static/tippy/popper.min.js"></script>
+<script type="text/javascript" src="/HMEID/static/tippy/tippy-bundle.umd.min.js"></script>
+{% endblock%}
+
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">Home</a></li>
+<li class="active">Search</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Search result</h1>
+</div>
+<br>
+<div class="table-responsive">
+    <table id="sttable" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Chromosome</th>
+            <th>Position</th>
+            <th>Type</th>
+            <th>Length</th>
+            <th>Subfamily</th>
+            <th>Total AC</th>
+            <th>Total AN</th>
+            <th>Total AF</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+	<div class="modal fade" id="siteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3 class="modal-title" id="siteModalTitle" style="font-weight:bold">Site detail</h4>
+		  </div>
+		  <div class="modal-body" id="siteModalDetail">
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+$(document).ready(function() {
+    var site_table = $('#sttable').DataTable({
+        "processing": true,
+        "ajax": {
+            "processing": true,
+            "url": "{% url 'search-json' %}?{{ search_request }}"
+        },
+        "createdRow": function( row, data, index ) {
+            $(row).addClass("siteDetail");
+            $(row).attr("id",data.id);
+            $(row).attr("style","cursor: pointer")
+        },
+        "columns": [
+            {"data":"id"},
+            {"data":"chrom"},
+            {"data":"position"},
+            {"data":"type"},
+            {"data":"length"},
+            {"data":"subfamily"},
+            {"data":"AC"},
+            {"data":"AN"},
+            {"data":"AF"}
+        ]
+    });
+    })
+$(document).on("click","tr.siteDetail", function(){
+    $.get("/HMEID/detail/"+$(this).attr("id"),function(result){
+		$('#siteModalDetail').html(result);
+        var SuperList = [Number($("#AFR_AF").text()),Number($("#AMR_AF").text()),Number($("#EUR_AF").text()),Number($("#EAS_1KGP_AF").text()),Number($("#SAS_AF").text())]
+        var SubList = [Number($("#CHB_AF").text()),Number($("#CHS1KGP_AF").text()),Number($("#CDX_AF").text()),Number($("#JPT_AF").text()),Number($("#KHV_AF").text())];
+        var NyuwaList = [Number($("#CHN_AF").text()),Number($("#CHS_AF").text())];
+        var SuperSum = SuperList[0] + SuperList[1] + SuperList[2] + SuperList[3] + SuperList[4];
+        var SubSum = SubList[0] + SubList[1] + SubList[2] + SubList[3] + SubList[4];
+        var NyuwaSum = NyuwaList[0] + NyuwaList[1];
+        if(SuperSum!=0){
+            var SuperPlot = echarts.init(document.getElementById('super_plot'));
+            SuperPlot.setOption({
+                title: {
+                    text:'Distribution across 1KGP super populations',
+                    right: "0"
+                },
+                legend: {
+                    orient: "vertical",
+                    left: "left",
+                    data: ["AFR","AMR","EUR","EAS (1KGP)","SAS"]
+                },
+                series : [
+                    {
+                        name: 'Super population percentage',
+                        type: 'pie',
+                        radius: '55%',
+                        data:[
+                            {value:SuperList[0], name:'AFR'},
+                            {value:SuperList[1], name:'AMR'},
+                            {value:SuperList[2], name:'EUR'},
+                            {value:SuperList[3], name:'EAS (1KGP)'},
+                            {value:SuperList[4], name:'SAS'}
+                        ],
+                        minShowLabelAngel: 1,
+                        label:{
+                            formatter: '{b}: {d}%'
+                        }
+                    }
+                ]
+            })
+        }
+        else {
+            $('#super_plot').remove()
+        }
+        if(SubSum!=0){
+            var SubPlot = echarts.init(document.getElementById('sub_plot'));
+            SubPlot.setOption({
+                title: {
+                    text:'Distribution across 1KGP sub-populations',
+                    right: "0"
+                },
+                legend: {
+                    orient: "vertical",
+                    left: "left",
+                    data: ["CHB","CHS (1KGP)","CDX","JPT","KHV"]
+                },
+                series : [
+                    {
+                        name: 'Subpopulation percentage',
+                        type: 'pie',
+                        radius: '55%',
+                        data:[
+                            {value:SubList[0], name:'CHB'},
+                            {value:SubList[1], name:'CHS (1KGP)'},
+                            {value:SubList[2], name:'CDX'},
+                            {value:SubList[3], name:'JPT'},
+                            {value:SubList[4], name:'KHV'}
+                        ],
+                        minShowLabelAngel: 1,
+                        label:{
+                            formatter: '{b}: {d}%'
+                        }
+                    }
+                ]
+            })
+        }
+        else {
+            $('#sub_plot').remove()
+        }
+        if(NyuwaSum!=0){
+            var NyuwaPlot = echarts.init(document.getElementById('nyuwa_plot'));
+            NyuwaPlot.setOption({
+                title: {
+                    text:'Distribution across Nyuwa sub-populations',
+                    right: "0"
+                },
+                legend: {
+                    orient: "vertical",
+                    left: "left",
+                    data: ["CHN","CHS"]
+                },
+                series : [
+                    {
+                        name: 'Nyuwa population percentage',
+                        type: 'pie',
+                        radius: '55%',
+                        data:[
+                            {value:NyuwaList[0], name:'CHN'},
+                            {value:NyuwaList[1], name:'CHS'},
+                        ],
+                        minShowLabelAngel: 1,
+                        label:{
+                            formatter: '{b}: {d}%'
+                        }
+                    }
+                ]
+            })
+        }
+        else {
+            $('#nyuwa_plot').remove();
+        }
+        if((SuperSum==0)&&(SubSum==0)&&(NyuwaSum==0)){
+            $('#pop_plots').remove();
+        }
+        $('#siteModal').modal('show');
+        tippy('[data-tippy-content]');
+    })
+})
+{% endblock %}

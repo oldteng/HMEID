@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    About - HMEID
+{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">Home</a></li>
+<li class="active">About</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>About</h1>
+</div>
+<br>
+<h2>Introduction of HMEID</h2>
+<hr>
+<p>HMEID is a database for providing comprehensive resources of human mobile element insertions (MEIs). MEIs collected in HMEID were detected by processing Whole Genome Sequencing (WGS) data from 1KGP and Nyuwa datasets. </p>
+<br>
+<h2>How to Cite</h2>
+<hr>
+<p>Niu, Y., Teng, X., Shi, Y., Li, Y., Tang, Y., Zhang, P., ... &amp; Han100K Initiative. (2021). <strong>Genome-wide analysis of mobile element insertions in human genomes.</strong> <em>bioRxiv.</em></p>
+<br>
+<h2>Contact Us</h2>
+<hr>
+<div class="row">
+    <div class="col-md-8">
+        <h3>Address</h3>
+        <p>Center for Big Data Research in Health,</p>
+        <p>Key Laboratory of RNA Biology,</p>
+        <p>Institute of Biophysics, Chinese Academy of Sciences</p>
+        <p>Beijing, P.R.China, 100101</p>
+        <br>
+        <h3>Email</h3>
+        <p>Yiwei Niu &nbsp; <a href='mailto:niuyiwei16@mails.ucas.ac.cn'>niuyiwei16@mails.ucas.ac.cn</a></p>
+        <p>Xueyi Teng &nbsp;  <a href='mailto:oldtengxy@gmail.com'>oldtengxy@gmail.com</a></p>
+        <p>Yirong Shi &nbsp;  <a href='mailto:shiyirong_1998@163.com'>shiyirong_1998@163.com</a></p>
+    </div>
+    <div class="col-md-4">
+        <img src="/HMEID/media/contact.jpg" style="width:340px;height:250px;margin-top:50px">
+    </div>
+</div>
+
+{% endblock %}
+

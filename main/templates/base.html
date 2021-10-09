@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/HMEID/media/favicon.png">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="/HMEID/static/js/jquery.min.js"></script>
+    <link href="/HMEID/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/HMEID/static/js/bootstrap.min.js"></script>
+    {% block header %}{% endblock %}
+  </head>
+
+  <body>
+    <div class="container-fluid">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}" style="color:#FFFFFF">HMEID: Human Mobile Element Insertion Database</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'download' %}">Download</a></li>
+            <li><a href="{% url 'statistics' %}">Statistics</a></li>
+            <li><a href="{% url 'help' %}">Help</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+        </div>
+    </nav>
+    </div>
+    <div class="container-fluid">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 class="text-center">HMEID</h1>
+                <p class="text-center">Human Mobile Element Insertion Database<p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+    <ol class="breadcrumb" style="background-color:#E7F7F9">
+        {% block breadcrumb %}{% endblock %}
+    </ol>
+    </div>
+
+    <div class="container">
+
+      {% block content %}{% endblock %}
+      <hr>
+
+      <footer>
+        <p class="text-center">&copy;2021, Center for Big Data Research in Health, Institute of Biophysics, Chinese Academy of Sciences</p>
+      </footer>
+    </div> <!-- /container -->
+    <script>
+        {% block script %}{% endblock %}
+    </script>
+
+  </body>
+</html>
+

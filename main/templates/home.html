@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    HMEID
+{% endblock %}
+
+{% block breadcrumb%}
+<li class="active">Home</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-9">
+<h2><span class="glyphicon glyphicon-search"></span> Search MEI</h2>
+<br>
+<form action="{% url 'search' %}" class="form-inline">
+    <h3>Search by gene</h3>
+    <br>
+    <div class="form-group">
+        <label for="GeneInput">&nbsp; &nbsp; Gene &nbsp;</label>
+        <input type="text" class="form-control" name="GeneInput">
+        &nbsp; &nbsp; Example: FAF1, ENSG00000164938
+    </div>
+    <br>
+    <br>
+    <h3>Search by region</h3>
+    <br>
+    <div class="form-group">
+        <label for="ChromInput">&nbsp; &nbsp; Chromosome &nbsp;</label>
+        <input type="text" class="form-control" name="ChromInput" placeholder="chr1" style="width:50pt">
+    </div>
+    <div class="form-group">
+        <label for="StartInput">&nbsp; Start &nbsp;</label>
+        <input type="text" class="form-control" name="StartInput" placeholder="0" style="width:100pt">
+    </div>
+    <div class="form-group">
+        <label for="EndInput">&nbsp; End &nbsp;</label>
+        <input type="text" class="form-control" name="EndInput" placeholder="1000000" style="width:100pt">
+    </div>
+    &nbsp; *Require hg38 position
+    <br>
+    <br>
+    <div class="form-group">
+        <label for="MEIType1">&nbsp; &nbsp; MEI Type &nbsp;</label>
+        <select class="form-control" name="MEIType1">
+            <option>All</option>
+            <option>Alu</option>
+            <option>L1</option>
+            <option>SVA</option>
+            <option>HERVK</option>
+        </select>
+    </div>
+    <br>
+    <br>
+    <h3>Search by site quality</h3>
+    <br>
+    <div class="form-group">
+        <label for="assess">&nbsp; &nbsp; ASSESS &ge; &nbsp;</label>
+        <input type="text" class="form-control" name="assess" style="width:50pt">
+    </div>
+    &nbsp;
+    <div class="form-group">
+        <label for="sr">&nbsp; SR &ge; &nbsp;</label>
+        <input type="text" class="form-control" name="sr" style="width:50pt">
+    </div>
+    &nbsp;
+    <div class="form-group">
+        <label for="lp">&nbsp; LP &ge; &nbsp;</label>
+        <input type="text" class="form-control" name="lp" style="width:50pt">
+    </div>
+    &nbsp;
+    <div class="form-group">
+        <label for="rp">&nbsp; RP &ge; &nbsp;</label>
+        <input type="text" class="form-control" name="rp" style="width:50pt">
+    </div>
+    <br>
+    <br>
+<h3>Search by site attributes</h3>
+<br>
+    <div class="form-group">
+        <label for="LenLow">&nbsp; &nbsp; Filter with Length &nbsp;</label>
+        <input type="text" class="form-control" name="LenLow" style="width:50pt">
+    </div>
+    <div class="form-group">
+        <label for="LenHigh">&nbsp; &lt; Length &le; &nbsp;</label>
+        <input type="text" class="form-control" name="LenHigh" style="width:50pt">
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        <label for="ACLow">&nbsp; &nbsp; Filter with AC &nbsp;</label>
+        <input type="text" class="form-control" name="ACLow" style="width:50pt">
+    </div>
+    <div class="form-group">
+        <label for="ACHigh">&nbsp; &lt; AC &le; &nbsp;</label>
+        <input type="text" class="form-control" name="ACHigh" style="width:50pt">
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        <label for="ANLow">&nbsp; &nbsp; Filter with AN &nbsp;</label>
+        <input type="text" class="form-control" name="ANLow" style="width:50pt">
+    </div>
+    <div class="form-group">
+        <label for="ANHigh">&nbsp; &lt; AN &le; &nbsp;</label>
+        <input type="text" class="form-control" name="ANHigh" style="width:50pt">
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        <label for="AFLow">&nbsp; &nbsp; Filter with AF &nbsp;</label>
+        <input type="text" class="form-control" name="AFLow" style="width:50pt">
+    </div>
+    <div class="form-group">
+        <label for="AFHigh">&nbsp; &lt; AF &le; &nbsp;</label>
+        <input type="text" class="form-control" name="AFHigh" style="width:50pt">
+    </div>
+    <br>
+    <br>
+    <button class="btn btn-primary btn-lg" type="submit">Search</button>
+</form>
+</div>
+<div class="col-md-3">
+    <h2><span class="glyphicon glyphicon-bullhorn"></span> News</h2>
+    <br>
+    <p><span class="glyphicon glyphicon-menu-right"></span>  Version 1.0 public released.</p>
+    <p style="color:#999999">&nbsp; &nbsp; &nbsp; May 2021</p>
+    <p><span class="glyphicon glyphicon-menu-right"></span>  Version 0.9 public released.</p>
+    <p style="color:#999999">&nbsp; &nbsp; &nbsp; Sep 2020</p>
+    <br>
+    <br>
+    <br>
+    <h2><span class="glyphicon glyphicon-share-alt"></span> How to cite</h2>
+    <br>
+    <p><span class="glyphicon glyphicon-menu-right"></span>  Niu, Y., Teng, X., Shi, Y., Li, Y., Tang, Y., Zhang, P., ... &amp; Han100K Initiative. (2021). <strong>Genome-wide analysis of mobile element insertions in human genomes.</strong> <em>bioRxiv.</em></p>
+    <br>
+    <br>
+    <br>
+    <h2><span class="glyphicon glyphicon-save"></span> Download</h2>
+    <p>Download a full copy of the MEIs documented in HMEID in spreadsheet format.</p>
+    <p><a class="btn btn-primary" href="{% url 'download' %}" role="button">View details &raquo;</a></p>
+    
+</div>
+</div>
+{% endblock %}
+
