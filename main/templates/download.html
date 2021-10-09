@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Download - HMEID
+{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">Home</a></li>
+<li class="active">Download</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Download</h1>
+</div>
+<br>
+<table class="table">
+    <tr class="info">
+        <td colspan="2"><strong>VCF file</strong></td>
+    </tr>
+    <tr>
+        <td>gz version</td>
+        <td><a href="{% url 'download-file' 'MEI.GRCh38.HMEIDv1.0.vcf.gz' %}">MEI.GRCh38.HMEIDv1.0.vcf.gz</a></td>
+    </tr>
+    <tr class="info">
+        <td colspan="2"><strong>Sample information</strong></td>
+    </tr>
+    <tr>
+        <td>gz version</td>
+        <td><a href="{% url 'download-file' 'sample_info.HMEIDv1.0.txt.gz' %}">sample_info.HMEIDv1.0.txt.gz</a></td>
+    </tr>
+</table>
+{% endblock %}

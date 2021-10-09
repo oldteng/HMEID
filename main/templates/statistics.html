@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Statistics - HMEID
+{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">Home</a></li>
+<li class="active">Statistics</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Statistics</h1>
+</div>
+<br>
+<h2>Statistics of MEI contents</h2>
+<hr>
+<br>
+<table class="table table-striped table-hover table-responsive">
+    <tr>
+        <th rowspan="2"></th>
+        <th rowspan="2">Total sites</th>
+        <th colspan="2">Mean sites per donor</th>
+        <th colspan="2">Standard deviation</th>
+    </tr>
+    <tr>
+        <th>NyuWa</th>
+        <th>1KGP</th>
+        <th>NyuWa</th>
+        <th>1KGP</th>
+    </tr>
+    <tr>
+        <th>Alu</th>
+        <td>26 553</td>
+        <td>1 035</td>
+        <td>884</td>
+        <td>25.3</td>
+        <td>153</td>
+    </tr>
+    <tr>
+        <th>L1</th>
+        <td>7 353</td>
+        <td>145</td>
+        <td>119</td>
+        <td>8.35</td>
+        <td>19.3</td>
+    </tr>
+    <tr>
+        <th>SVA</th>
+        <td>2 667</td>
+        <td>44.4</td>
+        <td>28.8</td>
+        <td>4.83</td>
+        <td>9.9</td>
+    </tr>
+    <tr>
+        <th>HERV-K</th>
+        <td>126</td>
+        <td>11</td>
+        <td>8.23</td>
+        <td>1.86</td>
+        <td>2.12</td>
+    </tr>
+    <tr>
+        <th>Total</th>
+        <td>36 699</td>
+        <td>1 236</td>
+        <td>1 040</td>
+        <td>30</td>
+        <td>178</td>
+    </tr>
+</table>
+<br>
+<br>
+<h2>Statistics of samples</h2>
+<hr>
+<br>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-condensed table-striped table-hover table-responsive">
+            <tr>
+                <th></th>
+                <th>Super population</th>
+                <th>Population</th>
+                <th>Samples</th>
+            </tr>
+            <tr>
+                <th rowspan="3">Nyuwa</th>
+                <td rowspan="3">EAS</td>
+                <td>CHN</td>
+                <td>459</td>
+            </tr>
+            <tr>
+                <td>CHS</td>
+                <td>610</td>
+            </tr>
+            <tr>
+                <td>Other</td>
+                <td>1 929</td>
+            </tr>
+            <tr>
+                <th rowspan="26">1KGP</th>
+                <td rowspan="7">AFR</td>
+                <td>ACB</td>
+                <td>95</td>
+            </tr>
+            <tr>
+                <td>ASW</td>
+                <td>65</td>
+            </tr>
+            <tr>
+                <td>ESN</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>GWD</td>
+                <td>120</td>
+            </tr>
+            <tr>
+                <td>LWK</td>
+                <td>112</td>
+            </tr>
+            <tr>
+                <td>MSL</td>
+                <td>98</td>
+            </tr>
+            <tr>
+                <td>YRI</td>
+                <td>107</td>
+            </tr>
+            <tr>
+                <td rowspan="4">AMR</td>
+                <td>CLM</td>
+                <td>103</td>
+            </tr>
+            <tr>
+                <td>MXL</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td>PEL</td>
+                <td>89</td>
+            </tr>
+            <tr>
+                <td>PUR</td>
+                <td>106</td>
+            </tr>
+            <tr>
+                <td rowspan="5">EAS</td>
+                <td>CDX</td>
+                <td>107</td>
+            </tr>
+            <tr>
+                <td>CHB</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>CHS (1KGP)</td>
+                <td>112</td>
+            </tr>
+            <tr>
+                <td>JPT</td>
+                <td>104</td>
+            </tr>
+            <tr>
+                <td>KHV</td>
+                <td>103</td>
+            </tr>
+            <tr>
+                <td rowspan="5">EUR</td>
+                <td>CEU</td>
+                <td>101</td>
+            </tr>
+            <tr>
+                <td>FIN</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>GBR</td>
+                <td>106</td>
+            </tr>
+            <tr>
+                <td>IBS</td>
+                <td>108</td>
+            </tr>
+            <tr>
+                <td>TSI</td>
+                <td>108</td>
+            </tr>
+            <tr>
+                <td rowspan="5">SAS</td>
+                <td>BEB</td>
+                <td>104</td>
+            </tr>
+            <tr>
+                <td>GIH</td>
+                <td>108</td>
+            </tr>
+            <tr>
+                <td>ITU</td>
+                <td>112</td>
+            </tr>
+            <tr>
+                <td>PJL</td>
+                <td>108</td>
+            </tr>
+            <tr>
+                <td>STU</td>
+                <td>110</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br>
+{% endblock %}
+

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Help - HMEID
+{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'index' %}">Home</a></li>
+<li class="active">Help</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Help</h1>
+</div>
+<br>
+<h2>Search MEIs</h2>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <h3>How to search MEIs</h3>
+        <br>
+        <p>MEIs can be searched in the Home page. We provide three types of search module. The filters in the three modules can be used simultaneously.</p>
+        <ul>
+            <li>Search by gene: HGNC gene symbol and Ensembl Gene Stable ID can be used</li>
+            <li>Search by region: Region can be specified (If gene name has been entered, the gene coordinates will be used) and MEI Type can be chosen</li>
+            <li>Search by site quality: MEI sets can be filtered by ASSESS, SR, LP, and RP.</li>
+            <li>Search by site attributes: MEI sets can be filtered by site length, AC, AN and AF.</li>
+        </ul>
+        <br>
+        <h4>About site quality</h4>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ASSESS</td>
+                    <td>Provides information on evidence availible to decide insertion site.<br>0 = No overlapping reads at site;<br>1 = Imprecise breakpoint due to greater than expected distance between evidence;<br>2 = discordant pair evidence only -- No split read information;<br>3 = left side TSD evidence only;<br>4 = right side TSD evidence only;<br>5 = TSD decided with split reads, highest possible quality</td>
+                </tr>
+                <tr>
+                    <td>SR</td>
+                    <td>Number of split reads</td>
+                </tr>
+                <tr>
+                    <td>LP</td>
+                    <td>Total number of discordant pairs supporting the left side of the breakpoint</td>
+                </tr>
+                <tr>
+                    <td>RP</td>
+                    <td>Total number of discordant pairs supporting the right side of the breakpoint</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+    <img src="/HMEID/media/help_search.png" style="width:496px;height:587px">
+    </div>
+</div>
+<br>
+<br>
+<h3>About the search result</h3>
+<p>Each entry in the result table links to a Site Detail page. The page shows the profile of the MEI including the position, MEI type, subfamily, aligned gene, consequence, GWAS SNP LD region overlapped, quality attributes, and frequency in different populations.</p>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Site profile</h4>
+        <ul>
+            <li>Position: The mobile element insert site position</li>
+            <li>Type: The MEI Type (Alu, L1, SVA, HERVK)</li>
+            <li>Subfamily: Subfamily predicted by MELT (only for Alu and L1)</li>
+            <li>Strand: The strand of the MEI</li>
+            <li>Length: The length of the MEI. When the length can't be detected, the field is "unknown"</li>
+            <li>Aligned gene: If the MEI is located in gene region, this field provide the gene symbol and Ensembl stable ID</li>
+            <li>Consequence: The functional annotation of the MEI aligned region (Intergenic, Enhancer, CDS, Coding intron, Noncoding Intron, Noncoding Exon, UTR, flanking sequence)</li>
+            <li>Endonuclease site: The endonuclease site beside the MEI</li>
+            <li>5' inversion: The 5' inversion position of L1 insertions. The position is from the 3' end (The same as the MELT ISTP field). </li>
+            <li>GWAS SNP LD: We extracted GWAS SNPs (p-value &lt; 1e-8) from the GWAS catelog database. The LD region was predicted by LD SNPs in 1KGP samples. This field provides the associated SNPs which have LD with MEI site.</li>
+        </ul>
+        <br>
+        <h4>Population table</h4>
+        <ul>
+            <li>Projects: Samples in our study are from 1KGP and Nyuwa projects</li>
+            <li>Subpopulation:
+            <ul>
+                <li>The population names of 1KGP projects are the same as the <a href="https://www.internationalgenome.org/faq/which-populations-are-part-your-study/">original classification. </a></li>
+                <li>The population in Nyuwa were devided into two subpopulations: CHN (North Han Chinese), and CHS (South Han Chinese)
+                
+            </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+    <img src="/HMEID/media/help_detail.png" style="width:397px;height:459px">
+    </div>
+</div>
+{% endblock %}
+
